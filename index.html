@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lootslab Rewards</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background: #1e1e1e;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .card {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 6px;
+            border: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>Lootslab – Reward Point → Robux</header>
+
+<div class="container">
+
+    <!-- LOGIN SECTION -->
+    <div class="card">
+        <h2>Login Akun</h2>
+        <input id="usn" placeholder="Username"><br><br>
+        <input id="pw" placeholder="Password" type="password"><br><br>
+        <button class="btn" onclick="login()">Login</button>
+
+        <p id="loginStatus" style="color: #32cd32; margin-top: 10px;"></p>
+    </div>
+
+    <!-- REWARD SECTION -->
+    <div class="card">
+        <h2>Reward Point Kamu</h2>
+        <h1 id="points">0</h1>
+        <button class="btn" onclick="addPoint()">Dapatkan Point (Iklan)</button>
+    </div>
+
+    <!-- REDEEM SECTION -->
+    <div class="card">
+        <h2>Tukar Point Jadi Robux</h2>
+        <p>100 Point = 10 Robux</p>
+        <button class="btn" onclick="redeem()">Tukar Sekarang</button>
+        <p id="redeemStatus" style="margin-top: 10px;"></p>
+    </div>
+
+</div>
+
+<script>
+    let loggedIn = false;
+    let points = 0;
+
+    function login() {
+        let u = document.getElementById("usn").value;
+        let p = document.getElementById("pw").value;
+
+        if (u.length < 3 || p.length < 3) {
+            document.getElementById("loginStatus").innerText = "Username atau password salah";
+            return;
+        }
+
+        loggedIn = true;
+        document.getElementById("loginStatus").innerText = "Login berhasil!";
+    }
+
+    function addPoint() {
+        if (!loggedIn) {
+            alert("Login dulu!");
+            return;
+        }
+
+        points += 10;
+        document.getElementById("points").innerText = points;
+    }
+
+    function redeem() {
+        if (!loggedIn) {
+            alert("Login dulu!");
+            return;
+        }
+
+        if (points < 100) {
+            document.getElementById("redeemStatus").innerText = "Point belum cukup!";
+            return;
+        }
+
+        points -= 100;
+        document.getElementById("points").innerText = points;
+        document.getElementById("redeemStatus").innerText = "Berhasil! Kamu mendapat 10 Robux.";
+    }
+</script>
+
+</body>
+</html>
